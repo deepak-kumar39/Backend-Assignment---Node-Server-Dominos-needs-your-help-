@@ -1,27 +1,28 @@
-// var http = require("http");
+let http = require("http");
+function handleServer(req, res) {
+  let url = req.url;
+  if (url === "/welcome") {
+    res.setHeader("Content-Type", "text/plain");
+    res.writeHead(200);
+    res.end("Welcome to Dominos!");
+    // return;
+  } else if (url === "/contact") {
+    res.setHeader("Content-Type", "application/json");
+    res.writeHead(200);
+    res.end(
+      JSON.stringify({
+        phone: "18602100000",
+        email: "guestcaredominos@jublfood.com",
+      })
+    );
+    // return;
+  } else {
+    res.writeHead(404);
+    
+  }
+}
+const httpServer = http.createServer(handleServer);
 
-// const httpServer = http.createServer(handleServer);
+httpServer.listen(8081);
 
-// httpServer.listen(8081)
-// function handleServer(req, res) {
-  
-// }
-
-// module.exports = httpServer;
-const express = require("express");
-const app = express();
-app.get("/welcome",function(request,response){
-    response.status(200).send("Welcome to Dominos!");
-})
-
-app.get("/",function(req,res){
-    res.sendStatus(404);
-})
-app.get("/contact",function(request,response){
-   response.status(200).json({phone: '18602100000',
-   email: 'guestcaredominos@jublfood.com'})
-});
-app.listen(8081,function(){
-console.log("server started on port 8081");
-});
-
+module.exports = httpServer;
