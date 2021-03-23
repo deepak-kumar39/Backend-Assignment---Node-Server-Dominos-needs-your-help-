@@ -5,7 +5,6 @@ function handleServer(req, res) {
     res.setHeader("Content-Type", "text/plain");
     res.writeHead(200);
     res.end("Welcome to Dominos!");
-    // return;
   } else if (url === "/contact") {
     res.setHeader("Content-Type", "application/json");
     res.writeHead(200);
@@ -15,14 +14,11 @@ function handleServer(req, res) {
         email: "guestcaredominos@jublfood.com",
       })
     );
-    // return;
   } else {
     res.writeHead(404);
-    
+    res.end("Not Found");
   }
 }
 const httpServer = http.createServer(handleServer);
-
 httpServer.listen(8081);
-
 module.exports = httpServer;
